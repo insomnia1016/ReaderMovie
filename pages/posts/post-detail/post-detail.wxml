@@ -18,3 +18,4 @@
   </view>
   <view class='detail'>{{postData.detail}}</view>
 </view>
+

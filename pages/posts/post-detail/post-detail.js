@@ -1,4 +1,6 @@
+
 var postsData = require('../../../data/posts-data.js')
+
 Page({
 
   /**
@@ -12,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     var postId = options.id
     this.data.currentPostId = postId
     var postData = postsData.postList[postId]
@@ -47,6 +50,11 @@ Page({
       }
     })
   },
+
+  
+  
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
