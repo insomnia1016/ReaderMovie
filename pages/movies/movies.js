@@ -27,7 +27,6 @@ Page({
     wx.request({
       url: url,
       success: function(res) {
-        console.log(res.data)
         that.processDouBanData(res.data, settedKey,category)
       },
       fail: function(error) {
