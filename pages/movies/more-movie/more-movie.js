@@ -16,5 +16,6 @@ Page({
       title: this.data.navigateTitle,
     })
   }
+
   
 })
