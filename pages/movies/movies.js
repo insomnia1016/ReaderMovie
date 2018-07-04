@@ -58,6 +58,12 @@ Page({
       category: category,
     }
     this.setData(readyData)
+  },
+  onMoreTap:function(options){
+    var category = options.currentTarget.dataset.category
+    wx.navigateTo({
+      url: 'more-movie/more-movie?category=' + category,
+    })
   }
 
 })
