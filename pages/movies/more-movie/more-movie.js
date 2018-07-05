@@ -79,6 +79,12 @@ Page({
       title: this.data.navigateTitle,
     })
   },
+  onMovieTap: function (options) {
+    var id = options.currentTarget.dataset.movieId
+    wx.navigateTo({
+      url: '../movie-detail/movie-detail?id=' + id,
+    })
+  }
   // onScrollLower:function(event){
   //   var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20" 
   //   util.http(nextUrl, this.processDouBanData)

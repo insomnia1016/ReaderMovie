@@ -52,5 +52,11 @@ Page({
     this.setData({
       movie: movie
     })
+  },
+  viewMoviePostImg:function(event){
+   var src = event.currentTarget.dataset.src
+   wx.previewImage({
+     urls: [src],
+   })
   }
 })
