@@ -30,6 +30,19 @@ Page({
     this.data.requestUrl = dataUrl
     util.http(dataUrl, this.processDouBanData)
   },
+  onPullDownRefresh:function(event){
+    var refreshUrl = this.data.requestUrl +"?start=0&count=20"
+    this.data.movies = {}
+    this.data.isEmpty = true
+    this.data.totalCount = 0
+    util.http(refreshUrl,this.processDouBanData)
+    wx.showNavigationBarLoading()
+  },
+  onReachBottom:function(event){
+    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20" 
+    util.http(nextUrl, this.processDouBanData)
+    wx.showNavigationBarLoading()
+  },
   processDouBanData: function(moivesDouBan) {
     var movies = []
     for (var idx in moivesDouBan.subjects) {
@@ -59,16 +72,17 @@ Page({
     })
     this.data.totalCount += 20
     wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
   },
   onReady: function(event) {
     wx.setNavigationBarTitle({
       title: this.data.navigateTitle,
     })
   },
-  onScrollLower:function(event){
-    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20" 
-    util.http(nextUrl, this.processDouBanData)
-    wx.showNavigationBarLoading()
-  }
+  // onScrollLower:function(event){
+  //   var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20" 
+  //   util.http(nextUrl, this.processDouBanData)
+  //   wx.showNavigationBarLoading()
+  // }
 
 })

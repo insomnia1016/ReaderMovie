@@ -3,16 +3,15 @@ var util = require('../../utils/util.js')
 var app = getApp()
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    inTheaters:{},
+    comingSoon:{},
+    top250:{},
+    searchResult:{},
+    searchPanelShow:false,
+    containerShow:true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function(options) {
     var inTheatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters?start=0&count=3"
     var comingSoonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon?start=0&count=3"
@@ -62,6 +61,30 @@ Page({
     var category = options.currentTarget.dataset.category
     wx.navigateTo({
       url: 'more-movie/more-movie?category=' + category,
+    })
+  },
+  onBindFocus:function(event){
+    this.setData({
+      containerShow:false,
+      searchPanelShow:true
+    })
+  },
+  onCancelTap:function(event){
+    this.setData({
+      containerShow: true,
+      searchPanelShow: false,
+      searchResult:{}
+    })
+  },
+  onBindConfirm:function(event){
+    var input_text = event.detail.value
+    var searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + input_text
+    this.getMovieListData(searchUrl,'searchResult','')
+  },
+  onMovieTap: function (options){
+    var id = options.currentTarget.dataset.movieId
+    wx.navigateTo({
+      url: 'movie-detail/movie-detail?id=' + id,
     })
   }
 
